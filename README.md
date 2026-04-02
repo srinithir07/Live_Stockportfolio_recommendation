@@ -3,6 +3,7 @@
 Stock Pulse is an AI-driven live stock portfolio recommendation system. It leverages real-time financial market data and advanced analytics to help users manage their investments effectively. Built with a sleek, premium dark-mode glassmorphism UI, Stock Pulse provides an elegant and insightful dashboard for investors of all levels.
 
 **FEATURES:**
+
 *   **Live Market Data:** Fetches real-time stock data directly from Yahoo Finance.
 *   **AI Recommendations:** Generates smart investment recommendations based on market trends to fit your budget and risk profile.
 *   **Technical Analysis:** Utilizes powerful quantitative analysis leveraging Pandas and NumPy for tracking moving averages, momentum, and more.
@@ -13,6 +14,7 @@ Stock Pulse is an AI-driven live stock portfolio recommendation system. It lever
 *   **User Authentication:** Secure login and registration functionality to keep user portfolios private.
 
 **TECH STACK:**
+
 *   **Backend:** Python, Flask, Werkzeug
 *   **Database:** SQLite3
 *   **Data Science & AI:** Pandas, NumPy, yfinance, TextBlob
@@ -20,11 +22,13 @@ Stock Pulse is an AI-driven live stock portfolio recommendation system. It lever
 *   **Frontend:** HTML5, CSS3 (Vanilla Vanilla CSS with Glassmorphism), Jinja2 Templates
 
 **PREREQUISITES:**
+
 Before you begin, make sure you have the following installed on your machine:
 *   [Python 3.8+](https://www.python.org/downloads/)
 *   `pip` (Python package installer)
 
 **INSTALLATION AND SETUP:**
+
 1. **Clone or Download the Repository**
    Ensure you have the project directory on your local machine.
 
@@ -87,6 +91,7 @@ stock-portfolio/
 ```
 
 **USAGE:**
+
 1. **Sign Up / Log In**: Start by creating a secure account.
 2. **Dashboard**: View your total portfolio value in INR, see your individual stock allocations, and check recent performance.
 3. **Get Recommendations**: Navigate to the recommendation section, input your budget and desired risk level (Low, Medium, High), and let the AI propose optimal stocks to buy based on recent sentiment and technical data.
