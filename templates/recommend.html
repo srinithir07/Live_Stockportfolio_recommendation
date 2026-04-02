@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="glass-container" style="max-width: 800px; margin: 0 auto; margin-bottom: 2rem;">
+    <h2 style="margin-top:0;">AI Stock Recommendation Engine <span style="font-size:0.5em; background:var(--accent-color); padding:0.2rem 0.5rem; border-radius:4px; vertical-align:middle;">BETA</span></h2>
+    <p style="color:var(--text-secondary); margin-bottom:2rem;">Leveraging NumPy, Pandas quantitative SMA analysis alongside NLP qualitative news sentiment analysis to score ticker validity.</p>
+
+    <form method="post">
+        <div class="filter-controls" style="align-items:flex-end;">
+            <div class="form-group" style="flex:1; margin-bottom:0;">
+                <label>Stock Symbol (e.g. AAPL)</label>
+                <input type="text" name="symbol" required placeholder="Enter symbol...">
+            </div>
+            <div class="form-group" style="flex:2; margin-bottom:0;">
+                <label>NewsAPI Key <span style="font-size:0.8em; color:var(--text-secondary);">(Optional, for NLP)</span></label>
+                <input type="text" name="api_key" placeholder="Get key at newsapi.org...">
+            </div>
+            <button type="submit" class="btn" style="height:44px; margin-bottom:0;">Analyze</button>
+        </div>
+    </form>
+</div>
+
+{% if result %}
+<div class="summary-cards">
+    <div class="summary-card">
+        <h3>Current Price</h3>
+        <p>${{ '{:,.2f}'.format(result.current_price) }}</p>
+    </div>
+    <div class="summary-card">
+        <h3>Technical Signal (SMA)</h3>
+        <p class="{% if 'Bullish' in result.tech_signal %}positive{% elif 'Bearish' in result.tech_signal %}negative{% endif %}" style="font-size:1.5rem;">
+            {{ result.tech_signal }}
+        </p>
+    </div>
+    <div class="summary-card">
+        <h3>NLP Sentiment</h3>
+        <p class="{% if result.sentiment_score > 0 %}positive{% elif result.sentiment_score < 0 %}negative{% endif %}" style="font-size:1.5rem;">
+            {{ result.sentiment_score }} / 1.0
+        </p>
+        {% if result.sentiment_error %}
+        <span style="font-size:0.75rem; color:var(--text-secondary); display:block; margin-top:0.5rem;">{{ result.sentiment_error }}</span>
+        {% endif %}
+    </div>
+</div>
+
+<div class="glass-container" style="text-align:center; padding:3rem 2rem;">
+    <h3 style="margin-top:0; color:var(--text-secondary); text-transform:uppercase; letter-spacing:0.1em; font-size:0.9rem;">Final AI Verdict</h3>
+    <h1 class="{% if 'BUY' in result.verdict %}positive{% elif 'SELL' in result.verdict %}negative{% endif %}" style="font-size:4rem; margin:1rem 0;">
+        {{ result.verdict }}
+    </h1>
+</div>
+
+{% if result.plot_url %}
+<div class="glass-container">
+    <h3 style="margin-top:0;">Matplotlib Analysis</h3>
+    <img src="{{ result.plot_url }}" alt="Stock Chart" style="width:100%; border-radius:8px; border:1px solid var(--glass-border);">
+</div>
+{% endif %}
+
+{% endif %}
+{% endblock %}

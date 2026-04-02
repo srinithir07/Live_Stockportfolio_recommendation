@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="glass-container" style="max-width: 600px; margin: 0 auto;">
+    <h2 style="margin-top:0;">Edit Investment</h2>
+    <p style="color:var(--text-secondary); margin-bottom:2rem;">Update details for {{ investment.symbol }}</p>
+
+    <form method="post">
+        <div class="form-group">
+            <label>Symbol</label>
+            <input type="text" name="symbol" value="{{ investment.symbol }}" required>
+        </div>
+
+        <div class="form-group">
+            <label>Category</label>
+            <select name="category" required>
+                <option value="Technology" {% if investment.category == 'Technology' %}selected{% endif %}>Technology</option>
+                <option value="Finance" {% if investment.category == 'Finance' %}selected{% endif %}>Finance</option>
+                <option value="Healthcare" {% if investment.category == 'Healthcare' %}selected{% endif %}>Healthcare</option>
+                <option value="Energy" {% if investment.category == 'Energy' %}selected{% endif %}>Energy</option>
+                <option value="Crypto" {% if investment.category == 'Crypto' %}selected{% endif %}>Crypto</option>
+                <option value="Other" {% if investment.category == 'Other' %}selected{% endif %}>Other</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>Quantity</label>
+            <input type="number" step="any" min="0.000001" name="quantity" value="{{ investment.quantity }}" required>
+        </div>
+
+        <div class="form-group">
+            <label>Buy Price</label>
+            <input type="number" step="any" min="0.01" name="buy_price" value="{{ investment.buy_price }}" required>
+        </div>
+
+        <div style="display:flex; gap:1rem; margin-top:2rem;">
+            <button type="submit" class="btn" style="flex:1;">Save Changes</button>
+            <a href="{{ url_for('dashboard') }}" class="btn btn-outline" style="flex:1;">Cancel</a>
+        </div>
+    </form>
+</div>
+{% endblock %}

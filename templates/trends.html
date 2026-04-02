@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="glass-container" style="max-width: 900px; margin: 0 auto; margin-bottom: 2rem;">
+    <div style="display:flex; justify-content:space-between; align-items:center;">
+        <h2 style="margin-top:0;">Trend Analysis: {{ symbol }}</h2>
+        <a href="{{ url_for('dashboard') }}" class="btn btn-outline">Back to Dashboard</a>
+    </div>
+    <p style="color:var(--text-secondary); margin-bottom:2rem;">Calculated using advanced Pandas volatility metrics and visualized strictly with Matplotlib.</p>
+
+    <div class="summary-cards" style="grid-template-columns: repeat(3, 1fr);">
+        <div class="summary-card">
+            <h3>Current Price</h3>
+            <p>${{ '{:,.2f}'.format(analysis.current_price) }}</p>
+        </div>
+        <div class="summary-card">
+            <h3>20-Day SMA</h3>
+            <p>${{ '{:,.2f}'.format(analysis.sma_20) if analysis.sma_20 else 'N/A' }}</p>
+        </div>
+        <div class="summary-card">
+            <h3>Pandas Volatility Pattern</h3>
+            <p style="font-size:1.2rem; color:var(--accent-color);">{{ analysis.pattern }}</p>
+        </div>
+    </div>
+</div>
+
+<div class="glass-container" style="max-width: 900px; margin: 0 auto;">
+    <h3 style="margin-top:0; color:var(--text-secondary);">Matplotlib rendering...</h3>
+    <img src="{{ analysis.plot_url }}" alt="Matplotlib Trend Analysis" style="width:100%; border-radius:8px; border:1px solid var(--glass-border);">
+</div>
+{% endblock %}
